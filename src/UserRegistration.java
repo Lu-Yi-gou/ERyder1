@@ -40,7 +40,7 @@ public class UserRegistration {
             System.out.println("Invalid choice.Please restart the registration process");
             return;
         }
-
+        
         sc.nextLine();
         System.out.println("Let's proceed with the registration...\n");
         System.out.println("Please enter your Full Name: ");
