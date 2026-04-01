@@ -22,7 +22,10 @@ public class RegisteredUsers {
         this.userType = userType;
         this.lastThreeTrips = lastThreeTrips;
     }
-
+     public RegisteredUsers(String fullName, String emailAddress) {
+        this.fullName = fullName;
+        this.emailAddress = emailAddress;
+     }
     public String getFullName() {
         return fullName;
     }
