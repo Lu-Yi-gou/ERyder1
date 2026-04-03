@@ -1,117 +1,120 @@
-public class RegisteredUsers {
+import java.util.Arrays;
+
+public class RegisteredUsers{
     private String fullName;
     private String emailAddress;
     private String dateOfBirth;
-    private String cardNumber;
-    private String cardExpiryDate;
+    private long cardNumber;
     private String cardProvider;
-    private String cvv;
+    private String cardExpiryDate;
+    private int cvv;
     private String userType;
-    private String[] lastThreeTrips;
+    private String[] lastThreeTrips = new String[3];
 
-    public RegisteredUsers(String fullName, String emailAddress, String dateOfBirth,
-                           String cardNumber, String cardExpiryDate, String cardProvider,
-                           String cvv, String userType, String[] lastThreeTrips) {
+    public RegisteredUsers() {
+    }
+
+    public RegisteredUsers(String fullName, String emailAddress, String dateOfBirth, long cardNumber, 
+                          String cardProvider, String cardExpiryDate, int cvv, String userType, 
+                          String[] lastThreeTrips) {
         this.fullName = fullName;
         this.emailAddress = emailAddress;
         this.dateOfBirth = dateOfBirth;
         this.cardNumber = cardNumber;
-        this.cardExpiryDate = cardExpiryDate;
         this.cardProvider = cardProvider;
+        this.cardExpiryDate = cardExpiryDate;
         this.cvv = cvv;
         this.userType = userType;
         this.lastThreeTrips = lastThreeTrips;
     }
-     public RegisteredUsers(String fullName, String emailAddress) {
-        this.fullName = fullName;
-        this.emailAddress = emailAddress;
-     }
+
+    // Getters
     public String getFullName() {
         return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 
     public String getEmailAddress() {
         return emailAddress;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
     public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getCardNumber() {
+    public long getCardNumber() {
         return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public String getCardExpiryDate() {
-        return cardExpiryDate;
-    }
-
-    public void setCardExpiryDate(String cardExpiryDate) {
-        this.cardExpiryDate = cardExpiryDate;
     }
 
     public String getCardProvider() {
         return cardProvider;
     }
 
-    public void setCardProvider(String cardProvider) {
-        this.cardProvider = cardProvider;
+    public String getCardExpiryDate() {
+        return cardExpiryDate;
     }
 
-    public String getCvv() {
+    public int getCvv() {
         return cvv;
-    }
-
-    public void setCvv(String cvv) {
-        this.cvv = cvv;
     }
 
     public String getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
     public String[] getLastThreeTrips() {
         return lastThreeTrips;
+    }
+
+    // Setters
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setCardNumber(long cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public void setCardProvider(String cardProvider) {
+        this.cardProvider = cardProvider;
+    }
+
+    public void setCardExpiryDate(String cardExpiryDate) {
+        this.cardExpiryDate = cardExpiryDate;
+    }
+
+    public void setCvv(int cvv) {
+        this.cvv = cvv;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public void setLastThreeTrips(String[] lastThreeTrips) {
         this.lastThreeTrips = lastThreeTrips;
     }
 
+    // toString method
     @Override
     public String toString() {
-        String trips = "";
-        for (String s : lastThreeTrips) {
-            trips += s + "\n";
-        }
-        return "Full Name: " + fullName + "\n" +
-                "Email: " + emailAddress + "\n" +
-                "Date of Birth: " + dateOfBirth + "\n" +
-                "Card Number: " + cardNumber + "\n" +
-                "Card Expiry: " + cardExpiryDate + "\n" +
-                "Card Provider: " + cardProvider + "\n" +
-                "CVV: " + cvv + "\n" +
-                "User Type: " + userType + "\n" +
-                "Last Three Trips:\n" + trips;
+        return "RegisteredUsers{" +
+                "fullName='" + fullName + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", cardNumber=" + cardNumber +
+                ", cardProvider='" + cardProvider + '\'' +
+                ", cardExpiryDate='" + cardExpiryDate + '\'' +
+                ", cvv=" + cvv +
+                ", userType='" + userType + '\'' +
+                ", lastThreeTrips=" + Arrays.toString(lastThreeTrips) +
+                '}';
     }
 }

@@ -22,14 +22,15 @@ public class UserRegistration {
     private boolean cardNumberValid=false;
     private boolean cardStillValid=false;
     private boolean validCVV=false;
+
     public void registration(){
-        System.out.println("Welcome to the ERyder Registration.\n");
-        System.out.println("Here are your two options:\n");
-        System.out.println("Register as a Regular User\n");
-        System.out.println("Register as a VIP User\n");
-        System.out.println("Please enter your choice (1 or 2):");
-        Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
+        System.out.println("Welcome to the ERyder Registration.\n" + //
+                        "Here are your two options:\n" + //
+                        "1. Register as a Regular User\n" + //
+                        "2. Register as a VIP User\n" + //
+                        "Please enter your choice (1 or 2):");
+        Scanner input = new Scanner(System.in);
+        int choice = input.nextInt();
         if(choice==1){
             userType="Regular User";
         }
@@ -40,42 +41,42 @@ public class UserRegistration {
             System.out.println("Invalid choice.Please restart the registration process");
             return;
         }
-        
-        sc.nextLine();
+
+        input.nextLine();
         System.out.println("Let's proceed with the registration...\n");
         System.out.println("Please enter your Full Name: ");
-        fullName=sc.nextLine();
+        fullName=input.nextLine();
 
         System.out.println("Please enter your Email Address: ");
-        emailAddress=sc.nextLine();
+        emailAddress=input.nextLine();
         System.out.println("Checking your email address's validity...\n");
         emailValid = analyseEmail(emailAddress);
 
         System.out.println("Please enter your date of birth as YYYY-MM-DD: ");
-        dateOfBirth = sc.nextLine();
+        dateOfBirth = input.nextLine();
         System.out.println("Checking your age validity...\n");
         LocalDate dob = LocalDate.parse(dateOfBirth);
         ageValid = analyseAge(dob);
 
         System.out.println("Please enter your card number(only Visa, MasterCard, and " + //
                         "American Express cards are accepted): ");
-        cardNumber = sc.nextLong();
+        cardNumber = input.nextLong();
         System.out.println("Checking your card number validity...\n");
         cardNumberValid = analyseCardNumber(cardNumber);
 
         System.out.println("Please enter your card expiry date: ");
-        cardExpiryDate = sc.nextLine();
+        cardExpiryDate = input.nextLine();
         System.out.println("Checking your expiry date validity...\n");
         cardStillValid = analyseCardExpiryDate(cardExpiryDate);
 
         System.out.println("Please enter your CVV: ");
-        cvv = sc.nextInt();
+        cvv = input.nextInt();
         System.out.println("Checking your CVV validity...\n");
         validCVV = analyseCVV(cvv);
 
         finalCheckpoint();
+        input.close();
 
-        sc.close();
 
     }
     private boolean analyseEmail(String emailAddress){

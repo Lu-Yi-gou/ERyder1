@@ -1,34 +1,64 @@
 import java.time.LocalDateTime;
-import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Scanner;
+
 public class RentalService {
-    private LinkedList<ActiveRental> activeRentalsList = new LinkedList<>();
-
-    public void startRental(String bikeID, String email) {
-        ActiveRental rental = new ActiveRental(bikeID, email, LocalDateTime.now());
-        activeRentalsList.add(rental);
-        System.out.println("Reserving bike: " + bikeID);
+    BikeService bikeService = new BikeService();
+    private boolean isRegisteredUser;
+    private String emailAddress;
+    private String location;
+    private String bikeID;
+    private boolean locationValid;
+    UserRegistration userRegistration = new UserRegistration();
+    LinkedList<ActiveRental> activeRentalsList = new LinkedList<>();
+    public RentalService(BikeService bikeService) {
+        this.bikeService = bikeService;
     }
-
-    public void endRental(String bikeID) {
-        Iterator<ActiveRental> it = activeRentalsList.iterator();
-        while (it.hasNext()) {
-            ActiveRental r = it.next();
-            if (r.getBikeID().equals(bikeID)) {
-                it.remove();
-                break;
-            }
-        }
-        System.out.println("Your trip has ended.");
+    public void setLocationValid(boolean valid){
+        locationValid=valid;
     }
-
-    public void viewActiveRentals() {
-        if (activeRentalsList.isEmpty()) {
-            System.out.println("No active rentals.");
+    public void simulateApplicationInput(){
+        System.out.println("This is the simulation of the e-bike rental process.");
+        System.out.println("Are you a registered user?");
+        Scanner sc = new Scanner(System.in);
+        isRegisteredUser = sc.nextBoolean();
+        sc.nextLine();
+        System.out.println("Please enter your email address");
+        emailAddress = sc.nextLine();
+        System.out.println("Please enter your location");
+        location = sc.nextLine();
+        System.out.println("Simulating the analysis of the rental request.");
+        bikeID = analyseRequest(isRegisteredUser,emailAddress,location);
+        if(bikeID!=null)locationValid=true;
+        if(!locationValid)
+        {
+            //sc.close();
             return;
         }
-        for (ActiveRental r : activeRentalsList) {
-            System.out.println(r);
+        System.out.println("Simulating e-bike reservation…");
+        bikeService.reserveBike(bikeID);
+        viewActiveRentals();
+        System.out.println("Simulating the end of the trip…");
+        bikeService.removeTrip(bikeID);
+        System.out.println("Displaying the active rentals after trip end…");
+        viewActiveRentals();
+        //sc.close();
+
+    }
+    private String analyseRequest(boolean isRegistered,String emailAddress,String location){
+        if(isRegistered)System.out.println("Welcome back, "+emailAddress+"!");
+        else{
+            System.out.println(" You’re not our registered user. Please consider registering.");
+            userRegistration.registration();
+        }
+        return bikeService.validateLocation(location);
+    }
+    private void viewActiveRentals(){
+        if(activeRentalsList.isEmpty())System.out.println("No active rentals at the moment.");
+        else {
+            for(ActiveRental activeRental:activeRentalsList){
+                System.out.println(activeRental);
+            }
         }
     }
 }
